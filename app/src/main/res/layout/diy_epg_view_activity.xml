@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAccent"
+    tools:context=".epgview.DiyEpgViewActivity">
+
+    <com.excellence.epgview.EpgView
+        android:id="@+id/epg_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#5000"
+        android:focusable="true" />
+
+</android.support.constraint.ConstraintLayout>

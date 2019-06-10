@@ -1,0 +1,56 @@
+def plugins = rootProject.ext.plugins
+def cfg = rootProject.ext.android
+def libs = rootProject.ext.dependencies
+
+apply plugin: plugins.application
+
+android {
+    compileSdkVersion cfg.compileSdkVersion
+
+    defaultConfig {
+        applicationId "com.excellence.diy.sample"
+        minSdkVersion cfg.minSdkVersion
+        targetSdkVersion cfg.targetSdkVersion
+        versionCode cfg.versionCode
+        versionName cfg.versionName
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    // 去掉AndroidManifest里面Google搜索的警告
+    lintOptions {
+        disable 'GoogleAppIndexingWarning'
+    }
+}
+
+configurations.all {
+    //每秒检查远程依赖是否存在更新
+    resolutionStrategy.cacheChangingModulesFor 1, 'seconds'
+    //每隔10分钟..
+    //resolutionStrategy.cacheChangingModulesFor 10, 'minutes'
+    // 采用动态版本声明的依赖缓存1秒
+    resolutionStrategy.cacheDynamicVersionsFor 1, 'seconds'
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation libs["appcompat-v7"]
+    implementation libs["constraint-layout"]
+    implementation libs["basetools"]
+
+    implementation(libs["diy-epgview"]) {
+        changing = true
+    }
+}
