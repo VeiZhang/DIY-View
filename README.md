@@ -4,7 +4,7 @@
 
 ## DIY-EpgView
 
-![diy-epgview][diy-epgview]
+[![diy-epgview][diy-epgview]](https://github.com/VeiZhang/DIY-EpgView)
 
 
 
