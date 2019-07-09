@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,6 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#5000"
-        android:focusable="true" />
+        android:focusable="true"
+        app:channel_text_selected_color="#5f5"
+        app:event_text_selected_color="#000"
+        app:time_bar_bg_color="#cc0000" />
 
 </android.support.constraint.ConstraintLayout>

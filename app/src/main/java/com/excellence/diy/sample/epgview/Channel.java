@@ -26,7 +26,6 @@ public class Channel implements EpgChannel {
         return mName;
     }
 
-    @Override
     public List<EpgEvent> getEventList() {
         return mEventList;
     }

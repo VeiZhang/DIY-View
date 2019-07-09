@@ -14,11 +14,14 @@ import com.excellence.epgview.EpgView;
 import java.util.List;
 
 public class DiyEpgViewActivity extends AppCompatActivity implements EpgView.OnEpgItemSelectedListener,
-        EpgView.OnEpgItemClickListener {
+        EpgView.OnEpgItemClickListener, EpgView.OnEpgItemVisibleChangeListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
     private EpgView mEpgView = null;
+    private TestEpg mTestEpg = null;
+    private List<Channel> mEpgChannelList = null;
+    private EpgAdapter mAdapter = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,49 +30,71 @@ public class DiyEpgViewActivity extends AppCompatActivity implements EpgView.OnE
 
         mEpgView = (EpgView) findViewById(R.id.epg_view);
 
-        TestEpg testEpg = new TestEpg();
-        final List<EpgChannel> channelList = testEpg.generateList();
+        mTestEpg = new TestEpg();
+        mEpgChannelList = mTestEpg.generateList();
 
-        EpgAdapter epgAdapter = new EpgAdapter() {
+        mAdapter = new EpgAdapter() {
             @Override
             public int getChannelCount() {
-                return channelList.size();
-            }
-
-            @Override
-            public List<EpgChannel> getChannelList() {
-                return channelList;
+                return mEpgChannelList.size();
             }
 
             @Override
             public EpgChannel getChannel(int position) {
-                return channelList.get(position);
+                return mEpgChannelList.get(position);
             }
 
             @Override
-            public List<EpgEvent> getEvents(int channelPosition) {
-                return channelList.get(channelPosition).getEventList();
+            public int getEventCount(int channelPosition) {
+                return mEpgChannelList.get(channelPosition).getEventList().size();
             }
 
             @Override
             public EpgEvent getEvent(int channelPosition, int programPosition) {
-                return getEvents(channelPosition).get(programPosition);
+                return mEpgChannelList.get(channelPosition).getEventList().get(programPosition);
             }
+
         };
-        mEpgView.setAdapter(epgAdapter);
+        mEpgView.setAdapter(mAdapter);
+        // 选中第30行
+        mEpgView.setRowSelection(50);
 
         mEpgView.setOnItemSelectedListener(this);
         mEpgView.setOnItemClickListener(this);
+        mEpgView.setOnItemVisibleChangeListener(this);
     }
 
     @Override
-    public void onEpgItemSelected(EpgEvent epgEvent) {
-        Log.i(TAG, "onEpgItemSelected: " + epgEvent.getName());
+    public void onEpgItemSelected(int channelPosition, int programPosition) {
+//        Log.d(TAG, "onEpgItemSelected: " + mAdapter.getEvent(channelPosition, programPosition).getName() + " - " + channelPosition + ":" + programPosition);
     }
 
     @Override
-    public void onEpgItemClick(EpgEvent epgEvent) {
+    public void onEpgItemClick(int channelPosition, int programPosition) {
+        EpgChannel epgChannel = mAdapter.getChannel(channelPosition);
+        EpgEvent epgEvent = mAdapter.getEvent(channelPosition, programPosition);
+        List<EpgEvent> epgEvents = mEpgChannelList.get(channelPosition).getEventList();
         Log.i(TAG, "onEpgItemClick: " + epgEvent.getName());
+
+        if (epgEvents.size() <= 1) {
+            epgEvents.clear();
+            epgEvents.addAll(mTestEpg.createEvents(epgChannel, System.currentTimeMillis()));
+            mEpgView.notifyDataChange();
+        }
+
+        if (mEpgView.getSelectRow() == 20) {
+            mEpgView.reset();
+        }
+    }
+
+    @Override
+    public void onEpgItemVisible(int position) {
+//        Log.w(TAG, "onEpgItemVisible: " + position);
+    }
+
+    @Override
+    public void onEpgItemInvisible(int position) {
+//        Log.w(TAG, "onEpgItemInvisible: " + position);
     }
 
 }

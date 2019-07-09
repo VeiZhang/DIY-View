@@ -20,7 +20,7 @@ public class Epg implements EpgEvent {
     private boolean isReminded;
     private boolean isRecording;
 
-    public Epg(Channel channel, long startTime, long endTime,
+    public Epg(EpgChannel channel, long startTime, long endTime,
                String name, boolean isReminded, boolean isRecording) {
         mEpgChannel = channel;
         mStartTime = startTime;
@@ -55,7 +55,6 @@ public class Epg implements EpgEvent {
         return isRecording;
     }
 
-    @Override
     public EpgChannel getChannel() {
         return mEpgChannel;
     }

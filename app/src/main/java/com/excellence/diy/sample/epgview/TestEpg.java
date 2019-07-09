@@ -49,9 +49,16 @@ public class TestEpg {
             "Die Hard"
     });
 
-    public List<EpgChannel> generateList() {
-        List<EpgChannel> channelList = new ArrayList<>();
+    public List<Channel> generateList() {
+        List<Channel> channelList = new ArrayList<>();
         long now = System.currentTimeMillis();
+        Channel firstChannel = new Channel();
+        firstChannel.setName("hello world ∞");
+        firstChannel.setArchived(randomBoolean());
+        firstChannel.setPlaying(randomBoolean());
+        firstChannel.addEvent(new Epg(firstChannel, -1, -1,
+                availableChannelLogos.get(randomBetween(0, 6)), randomBoolean(), randomBoolean()));
+        channelList.add(firstChannel);
         for (int i = 0; i < 50; i++) {
             Channel channel = new Channel();
             channel.setName("hello world " + i);
@@ -63,7 +70,7 @@ public class TestEpg {
         return channelList;
     }
 
-    private List<EpgEvent> createEvents(Channel channel, long nowMillis) {
+    public List<EpgEvent> createEvents(EpgChannel channel, long nowMillis) {
         List<EpgEvent> result = new ArrayList<>();
 
         long epgStart = nowMillis - DAYS_BACK_MILLIS;
