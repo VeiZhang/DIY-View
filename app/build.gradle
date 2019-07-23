@@ -50,7 +50,7 @@ dependencies {
     implementation libs["constraint-layout"]
     implementation libs["basetools"]
 
-    implementation(libs["diy-epgview"]) {
+    implementation(libs["epgview"]) {
         changing = true
     }
 }
