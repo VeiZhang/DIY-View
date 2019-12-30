@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.excellence.diy.sample">
+
+    <uses-feature
+        android:name="android.software.leanback"
+        android:required="true" />
+
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
+
+    <uses-sdk tools:overrideLibrary="fr.bmartel.youtubetv,androidx.leanback" />
 
     <application
         android:allowBackup="true"
@@ -15,8 +26,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".epgview.DiyEpgViewActivity" />
+        <activity android:name=".YoutubeActivity" />
     </application>
 
 </manifest>

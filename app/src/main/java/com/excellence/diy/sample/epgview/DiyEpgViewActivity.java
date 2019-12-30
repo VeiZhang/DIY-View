@@ -1,6 +1,5 @@
 package com.excellence.diy.sample.epgview;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -13,7 +12,9 @@ import com.excellence.epgview.EpgView;
 
 import java.util.List;
 
-public class DiyEpgViewActivity extends AppCompatActivity implements EpgView.OnEpgItemSelectedListener,
+import androidx.fragment.app.FragmentActivity;
+
+public class DiyEpgViewActivity extends FragmentActivity implements EpgView.OnEpgItemSelectedListener,
         EpgView.OnEpgItemClickListener, EpgView.OnEpgItemVisibleChangeListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();

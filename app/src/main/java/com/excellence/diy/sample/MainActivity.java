@@ -1,7 +1,6 @@
 package com.excellence.diy.sample;
 
 import android.app.Activity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,7 +16,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity {
+import androidx.fragment.app.FragmentActivity;
+
+public class MainActivity extends FragmentActivity {
 
     private Map<String, Class<? extends Activity>> mClsMap = new HashMap<>();
 
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
         ListView diyViewList = (ListView) findViewById(R.id.diy_view_lv);
         mClsMap.put("DIY-EpgView", DiyEpgViewActivity.class);
+        mClsMap.put("YoutubeTV", YoutubeActivity.class);
         final List<String> data = Arrays.asList(mClsMap.keySet().toArray(new String[]{}));
         diyViewList.setAdapter(new CommonAdapter<String>(data, android.R.layout.simple_list_item_1) {
             @Override
