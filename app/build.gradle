@@ -16,6 +16,7 @@ android {
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -24,7 +25,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
     // 去掉AndroidManifest里面Google搜索的警告
     lintOptions {
         disable 'GoogleAppIndexingWarning'
@@ -51,6 +55,9 @@ dependencies {
         changing = true
     }
     implementation(libs["youtubetv"]) {
+        changing = true
+    }
+    implementation(libs["smarttube"]) {
         changing = true
     }
     implementation libs["leanback"]

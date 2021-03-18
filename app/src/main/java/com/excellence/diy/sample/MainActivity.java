@@ -30,6 +30,7 @@ public class MainActivity extends FragmentActivity {
         ListView diyViewList = (ListView) findViewById(R.id.diy_view_lv);
         mClsMap.put("DIY-EpgView", DiyEpgViewActivity.class);
         mClsMap.put("YoutubeTV", YoutubeActivity.class);
+        mClsMap.put("SmartTube", SmartTubeActivity.class);
         final List<String> data = Arrays.asList(mClsMap.keySet().toArray(new String[]{}));
         diyViewList.setAdapter(new CommonAdapter<String>(data, android.R.layout.simple_list_item_1) {
             @Override
